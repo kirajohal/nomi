@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Button, Grid, Image } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Nomi</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Image src="/nomi.jpg" />
+            </Grid.Column>
+            <Grid.Column width={10} />
+            <Grid.Column width={3} textAlign="right" verticalAlign="middle">
+              <Button>Register</Button>
+              <Button>Login</Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }

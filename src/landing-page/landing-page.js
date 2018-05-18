@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
-import './App.css';
+import './landing-page.css';
 import { Button, Grid, Image } from 'semantic-ui-react';
 
-class App extends Component {
+class LandingPage extends Component {
   render() {
     return (
       <div>
+        <div className="headerContainer">
         <Grid>
           <Grid.Row>
             <Grid.Column width={3}>
-              <Image src="/nomi.jpg" />
+              <Image size="medium" src="/nomi.jpg" />
             </Grid.Column>
             <Grid.Column width={10} />
             <Grid.Column width={3} textAlign="right" verticalAlign="middle">
-              <Button>Register</Button>
-              <Button>Login</Button>
+              <Button basic color='black'>Register</Button>
+              <Button basic color='black'>Login</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        </div>
+        <div className="descriptionContainer"/>
       </div>
     );
   }
 }
 
-export default App;
+export default LandingPage;

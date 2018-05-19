@@ -1588,6 +1588,10 @@ colormin@^1.0.5:
     css-color-names "0.0.4"
     has "^1.0.1"
 
+colors@^1.1.0:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.2.5.tgz#89c7ad9a374bc030df8013241f68136ed8835afc"
+
 colors@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
@@ -2626,7 +2630,7 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-express@^4.13.3:
+express@^4.13.3, express@^4.16.3:
   version "4.16.3"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.3.tgz#6af8a502350db3246ecc4becf6b5a34d22f7ed53"
   dependencies:
@@ -4628,6 +4632,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
   dependencies:
     minimist "0.0.8"
 
+moment@^2.10.3:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -6103,7 +6111,17 @@ rethinkdb-websocket-client@^0.4.7:
     rethinkdb "^2.2.3"
     ws "^0.8.0"
 
-rethinkdb@^2.2.3, rethinkdb@^2.3.3:
+rethinkdb-websocket-server@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/rethinkdb-websocket-server/-/rethinkdb-websocket-server-0.6.0.tgz#1dc9dbda35e0484e327bd881c60fad91d1c5a8fc"
+  dependencies:
+    bluebird "^2.9.27"
+    colors "^1.1.0"
+    moment "^2.10.3"
+    rethinkdb "^2.3.0"
+    ws "^0.8.0"
+
+rethinkdb@^2.2.3, rethinkdb@^2.3.0, rethinkdb@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/rethinkdb/-/rethinkdb-2.3.3.tgz#3dc6586e22fa1dabee0d254e64bd0e379fad2f72"
   dependencies:

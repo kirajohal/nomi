@@ -1,16 +1,11 @@
-import r from "rethinkdb";
+const ReactRethinkdb = require('react-rethinkdb');
+const r = ReactRethinkdb.r;
 
-export default async function registerUser(email, password) {
-  const connection = await r.connect({
-    host: "http://localhost",
-    port: 28015,
-    authKey: "",
-    db: "nomi"
-  });
-  const insertResult = await r.table("users").insert({
+export default function registerUser(email, password) {
+  const query = r.table('users').insert({
     email,
     password
   });
 
-  console.log(insertResult);
+  ReactRethinkdb.DefaultSession.runQuery(query);
 }

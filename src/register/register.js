@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Form,
   Checkbox,
   Button,
   Container,
   Header,
-  Icon,
-} from 'semantic-ui-react';
-import registerUser from './register-user';
+  Icon
+} from "semantic-ui-react";
+import registerUser from "./register-user";
 
 class Register extends Component {
   state = {
-    email: '',
-    password: '',
+    email: "",
+    password: ""
   };
 
   handleChange = e => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './page-header.css';
 import { Button, Grid, Image } from 'semantic-ui-react';
 
@@ -13,10 +14,10 @@ class PageHeader extends Component {
             </Grid.Column>
             <Grid.Column width={10} />
             <Grid.Column width={3} textAlign="right" verticalAlign="middle">
-              <Button basic color="black">
+              <Button basic color="black" as={Link} to="/register">
                 Register
               </Button>
-              <Button basic color="black">
+              <Button basic color="black" as={Link} to="/login">
                 Login
               </Button>
             </Grid.Column>

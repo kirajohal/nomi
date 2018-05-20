@@ -1,3 +1,5 @@
+import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -15,5 +17,11 @@ ReactRethinkdb.DefaultSession.connect({
   autoReconnectDelayMs: 2000 // when disconnected, millis to wait before reconnect
 });
 
-ReactDOM.render(<LandingPage />, document.getElementById('root'));
+ReactDOM.render(
+  <BrowserRouter>
+    <LandingPage />
+  </BrowserRouter>,
+  document.getElementById('root')
+);
+
 registerServiceWorker();

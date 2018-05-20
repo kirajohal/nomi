@@ -7,10 +7,9 @@ import {
   Header,
   Icon
 } from 'semantic-ui-react';
-import registerUser from './register-user';
-import { Redirect } from 'react-router';
+import loginUser from './login-user';
 
-class Register extends Component {
+class Login extends Component {
   state = {
     email: '',
     password: '',
@@ -26,8 +25,9 @@ class Register extends Component {
     const { email, password } = this.state;
     this.setState({ processing: true });
     try {
-      await registerUser(email, password);
-      this.setState({ redirect: true, processing: false });
+      await loginUser(email, password);
+
+      //this.setState({ processing: false });
     } catch (err) {
       return;
     }
@@ -36,15 +36,12 @@ class Register extends Component {
   render() {
     const { email, password } = this.state;
 
-    if (this.state.redirect) {
-      return <Redirect push to="/login" />;
-    }
     return (
       <Container>
         <Header as="h1" textAlign="center">
           <Header.Content>
-            Register
-            <Header.Subheader>We want your details</Header.Subheader>
+            Login
+            <Header.Subheader>Remind us who you are</Header.Subheader>
           </Header.Content>
         </Header>
         <Form onSubmit={this.handleSubmit}>
@@ -67,20 +64,12 @@ class Register extends Component {
               onChange={this.handleChange}
             />
           </Form.Field>
-          <Form.Field type="password">
-            <label>Repeat your password if you are a masochist</label>
-            <input type="password" placeholder="Password" />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox label="I agree to hand over my soul" />
-          </Form.Field>
-
           <Button loading={this.state.processing} type="submit">
-            Submit
+            Login
           </Button>
         </Form>
       </Container>
     );
   }
 }
-export default Register;
+export default Login;

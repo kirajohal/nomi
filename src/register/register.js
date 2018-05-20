@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Form,
   Checkbox,
@@ -6,24 +6,31 @@ import {
   Container,
   Header,
   Icon
-} from "semantic-ui-react";
-import registerUser from "./register-user";
+} from 'semantic-ui-react';
+import registerUser from './register-user';
 
 class Register extends Component {
   state = {
-    email: "",
-    password: ""
+    email: '',
+    password: '',
+    processing: false
   };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const { email, password } = this.state;
+    this.setState({ processing: true });
+    try {
+      await registerUser(email, password);
 
-    registerUser(email, password);
+      //this.setState({ processing: false });
+    } catch (err) {
+      return;
+    }
   };
 
   render() {
@@ -64,7 +71,10 @@ class Register extends Component {
           <Form.Field>
             <Checkbox label="I agree to hand over my soul" />
           </Form.Field>
-          <Button type="submit">Submit</Button>
+
+          <Button loading={this.state.processing} type="submit">
+            Submit
+          </Button>
         </Form>
       </Container>
     );

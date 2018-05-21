@@ -4,26 +4,32 @@ import {
   Checkbox,
   Button,
   Container,
-  Header,
-  Icon
+  Header
 } from "semantic-ui-react";
 import registerUser from "./register-user";
 
 class Register extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    processing: false
   };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const { email, password } = this.state;
+    this.setState({processing: true});
 
-    registerUser(email, password);
+    try {
+      await registerUser(email, password);
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   };
 
   render() {
@@ -64,7 +70,7 @@ class Register extends Component {
           <Form.Field>
             <Checkbox label="I agree to hand over my soul" />
           </Form.Field>
-          <Button type="submit">Submit</Button>
+          <Button loading={this.state.processing} type="submit">Submit</Button>
         </Form>
       </Container>
     );

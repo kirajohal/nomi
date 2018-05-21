@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import LandingPage from './landing-page/landing-page';
+import './layout.css';
+import PageHeader from './page-header';
 import registerServiceWorker from './registerServiceWorker';
+import { BrowserRouter } from 'react-router-dom';
+
+import routes from './routes';
 
 var ReactRethinkdb = require('react-rethinkdb');
 
@@ -15,5 +18,5 @@ ReactRethinkdb.DefaultSession.connect({
   autoReconnectDelayMs: 2000 // when disconnected, millis to wait before reconnect
 });
 
-ReactDOM.render(<LandingPage />, document.getElementById('root'));
+ReactDOM.render(<BrowserRouter><div><PageHeader /><div className="layoutContainer">{routes}</div></div></BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-export default function LandingPage() {
+export default function PageNotFound() {
     return (
       <div>
-        WELCOME!
+        Oops! Couldn't find this page!
       </div>
     );
 }

@@ -6,9 +6,9 @@ import {
   Container,
   Header
 } from "semantic-ui-react";
-import registerUser from "./register-user";
+import loginUser from "./login-user";
 
-class Register extends Component {
+class Login extends Component {
   state = {
     email: "",
     password: "",
@@ -25,7 +25,7 @@ class Register extends Component {
     this.setState({processing: true});
 
     try {
-      await registerUser(email, password);
+      await loginUser(email, password);
     } catch (err) {
       console.log(err);
       return;
@@ -39,8 +39,8 @@ class Register extends Component {
       <Container>
         <Header as="h1" textAlign="center">
           <Header.Content>
-            Register
-            <Header.Subheader>We want your details</Header.Subheader>
+            Login
+            <Header.Subheader>Remind us who you are</Header.Subheader>
           </Header.Content>
         </Header>
         <Form onSubmit={this.handleSubmit}>
@@ -70,10 +70,10 @@ class Register extends Component {
           <Form.Field>
             <Checkbox label="I agree to hand over my soul" />
           </Form.Field>
-          <Button loading={this.state.processing} type="submit">Register</Button>
+          <Button loading={this.state.processing} type="submit">Login</Button>
         </Form>
       </Container>
     );
   }
 }
-export default Register;
+export default Login;

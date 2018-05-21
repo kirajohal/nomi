@@ -8,14 +8,14 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-rethinkdb": "^0.6.1",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "rethinkdb": "^2.3.3",
     "rethinkdb-websocket-server": "^0.6.0",
     "semantic-ui-react": "^0.80.0"
   },
   "scripts": {
-    "start":
-      "concurrently --kill-others \"node src/server/server.js \" \"react-scripts start\" \"rethinkdb\"",
+    "start": "concurrently --kill-others \"node src/server/server.js \" \"react-scripts start\" \"rethinkdb\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -1,11 +1,15 @@
 // Import third-party libraries (managed by npm)
 var express = require('express');
+var session = require('express-session');
 var http = require('http');
 var RethinkdbWebsocketServer = require('rethinkdb-websocket-server');
 
 // Set up an HTTP route to serve files from assets/
 var app = express();
 var httpServer = http.createServer(app);
+
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+
 
 // Configure rethinkdb-websocket-server to listen on the /db path and proxy
 // incoming WebSocket connections to the RethinkDB server running on localhost
@@ -18,6 +22,45 @@ RethinkdbWebsocketServer.listen({
   dbPort: 28015,
   unsafelyAllowAnyQuery: true
 });
+
+app.use(session({secret:'deathdeathdeath'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+app.post('/login',
+  passport.authenticate('local'),
+  function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.redirect('/users/' + req.user.username);
+  });
+
+// require('../routes.js')(app,passport);
 
 // Start the HTTP server on port 8015
 httpServer.listen(8015);

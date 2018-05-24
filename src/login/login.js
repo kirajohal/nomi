@@ -1,18 +1,12 @@
-import React, { Component } from "react";
-import {
-  Form,
-  Checkbox,
-  Button,
-  Container,
-  Header
-} from "semantic-ui-react";
-import loginUser from "./login-user";
+import React, { Component } from 'react';
+import { Form, Checkbox, Button, Container, Header } from 'semantic-ui-react';
+import loginUser from './login-user';
 
 class Login extends Component {
   state = {
-    email: "",
-    password: "",
-    processing: false
+    email: '',
+    password: '',
+    processing: false,
   };
 
   handleChange = e => {
@@ -22,7 +16,7 @@ class Login extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const { email, password } = this.state;
-    this.setState({processing: true});
+    this.setState({ processing: true });
 
     try {
       await loginUser(email, password);
@@ -63,14 +57,9 @@ class Login extends Component {
               onChange={this.handleChange}
             />
           </Form.Field>
-          <Form.Field type="password">
-            <label>Repeat your password if you are a masochist</label>
-            <input type="password" placeholder="Password" />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox label="I agree to hand over my soul" />
-          </Form.Field>
-          <Button loading={this.state.processing} type="submit">Login</Button>
+          <Button loading={this.state.processing} type="submit">
+            Login
+          </Button>
         </Form>
       </Container>
     );

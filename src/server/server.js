@@ -5,11 +5,11 @@ var http = require('http');
 var RethinkdbWebsocketServer = require('rethinkdb-websocket-server');
 
 // Set up an HTTP route to serve files from assets/
-var app = express();
-var httpServer = http.createServer(app);
+const app = express();
+const httpServer = http.createServer(app);
 
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
-
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 // Configure rethinkdb-websocket-server to listen on the /db path and proxy
 // incoming WebSocket connections to the RethinkDB server running on localhost
@@ -20,17 +20,28 @@ RethinkdbWebsocketServer.listen({
   httpPath: '/db',
   dbHost: 'localhost',
   dbPort: 28015,
-  unsafelyAllowAnyQuery: true
+  unsafelyAllowAnyQuery: true,
 });
 
-app.use(session({secret:'deathdeathdeath'}));
+app.use(session({ secret: 'deathdeathdeath' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    const storedUsername = 'delliott';
+    const storedPassword = 'password';
+
+    if (storedUsername === username && storedPassword === password) {
+      return done(null, { username, password });
+    } else {
+      return done(null, false, { message: 'Failed to Authenticate' });
+    }
+
+    User.findOne({ username: username }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
@@ -39,8 +50,8 @@ passport.use(new LocalStrategy(
       }
       return done(null, user);
     });
-  }
-));
+  })
+);
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -52,13 +63,11 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-app.post('/login',
-  passport.authenticate('local'),
-  function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    res.redirect('/users/' + req.user.username);
-  });
+app.post('/login', passport.authenticate('local'), function(req, res) {
+  // If this function gets called, authentication was successful.
+  // `req.user` contains the authenticated user.
+  res.redirect('/users/' + req.user.username);
+});
 
 // require('../routes.js')(app,passport);
 
